@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Queries - UniDBMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/app.js"></script>
+</head>
+<body class="bg-gray-50 flex h-screen overflow-hidden font-inter text-gray-800">
+
+    <aside class="w-64 bg-slate-900 text-white flex flex-col shadow-xl z-20">
+        <div class="h-16 flex items-center px-6 bg-slate-950 border-b border-slate-800">
+            <i class="fa-solid fa-graduation-cap text-blue-400 text-2xl mr-3"></i>
+            <span class="text-xl font-bold tracking-wider">UniDBMS</span>
+        </div>
+        <nav class="flex-1 overflow-y-auto py-4 fancy-scrollbar">
+            <ul class="space-y-1">
+                <li><a href="index.html" class="nav-item flex items-center px-6 py-3 hover:bg-slate-800 transition-colors"><i class="fa-solid fa-chart-pie w-6"></i> Dashboard</a></li>
+                <li class="px-6 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mt-4">Institutions</li>
+                <li><a href="colleges.html" class="nav-item flex items-center px-6 py-3 hover:bg-slate-800 transition-colors"><i class="fa-solid fa-building-columns w-6"></i> Colleges</a></li>
+                <li><a href="departments.html" class="nav-item flex items-center px-6 py-3 hover:bg-slate-800 transition-colors"><i class="fa-solid fa-sitemap w-6"></i> Departments</a></li>
+                <li class="px-6 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mt-4">Academics</li>
+                <li><a href="courses.html" class="nav-item flex items-center px-6 py-3 hover:bg-slate-800 transition-colors"><i class="fa-solid fa-book w-6"></i> Courses</a></li>
+                <li><a href="sections.html" class="nav-item flex items-center px-6 py-3 hover:bg-slate-800 transition-colors"><i class="fa-solid fa-chalkboard w-6"></i> Sections</a></li>
+                <li class="px-6 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mt-4">People</li>
+                <li><a href="instructors.html" class="nav-item flex items-center px-6 py-3 hover:bg-slate-800 transition-colors"><i class="fa-solid fa-chalkboard-user w-6"></i> Instructors</a></li>
+                <li><a href="students.html" class="nav-item flex items-center px-6 py-3 hover:bg-slate-800 transition-colors"><i class="fa-solid fa-user-graduate w-6"></i> Students</a></li>
+                <li class="px-6 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mt-4">Records</li>
+                <li><a href="enrollments.html" class="nav-item flex items-center px-6 py-3 hover:bg-slate-800 transition-colors"><i class="fa-solid fa-file-signature w-6"></i> Enrollments & Grades</a></li>
+                <li class="px-6 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mt-4">Analytics</li>
+                <li><a href="reports.html" class="nav-item flex items-center px-6 py-3 hover:bg-slate-800 transition-colors"><i class="fa-solid fa-file-invoice w-6"></i> Standard Reports</a></li>
+                <li><a href="queries.html" class="nav-item active flex items-center px-6 py-3 bg-slate-800 transition-colors"><i class="fa-solid fa-magnifying-glass-chart w-6"></i> Advanced Queries</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        <header class="h-16 bg-white shadow-sm flex items-center justify-between px-8 z-10 border-b border-gray-100">
+            <h1 class="text-2xl font-bold text-gray-800">Advanced Complex Queries</h1>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 bg-slate-50/50 flex flex-col md:flex-row gap-6 relative">
+            <div id="loading-spinner" class="hidden absolute inset-0 bg-white/60 backdrop-blur-sm z-50 flex items-center justify-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            </div>
+
+            <!-- Query Selector panel -->
+            <div class="w-full md:w-80 bg-white rounded-xl shadow-sm border border-gray-100 flex-shrink-0 h-min sticky top-0 p-6">
+                <h2 class="text-lg font-bold text-gray-800 mb-4 pb-2 border-b">Select Query</h2>
+                <form id="query-form" onsubmit="executeQuery(event)">
+                    <div class="mb-4">
+                        <select id="query-select" class="form-input text-sm" onchange="toggleParams()">
+                            <option value="dept-rankings">1. Dept Rank by GPA</option>
+                            <option value="low-gpa-depts">2. Low GPA Depts (< 2.5)</option>
+                            <option value="busy-instructors">3. Overloaded Faculty (>3 courses)</option>
+                            <option value="unoffered-courses">4. Unoffered Courses</option>
+                            <option value="all-dept-courses-students">5. Students Completing Dept Curriculum</option>
+                            <option value="top-students-by-dept">6. Top 5 Students per Dept</option>
+                            <option value="dept-chairs">7. Faculty serving as Chairs</option>
+                            <option value="sections-by-enrollment">8. Sections by Enrollment</option>
+                            <option value="failed-students">9. Heavily Failing Students (>2 Fs)</option>
+                            <option value="enrollment-trends">10. Term Enrollment Trends</option>
+                            <option value="popular-courses">11. Top Avg GPA Courses</option>
+                            <option value="unenrolled-students">12. Unenrolled Students</option>
+                            <option value="same-course-pairs">13. Student Pairs with exact same courses</option>
+                            <option value="dept-grade-distribution">14. Dept Grade Distributions</option>
+                            <option value="most-popular-course-per-sem">15. Most Popular Course per Term</option>
+                            <option value="never-taught-instructors">16. Non-teaching Faculty</option>
+                            <option value="student-standing">17. Academic Standings Classification</option>
+                            <option value="most-used-rooms">18. Highest Utilization Rooms</option>
+                        </select>
+                    </div>
+
+                    <div id="params-area" class="hidden space-y-3 mb-6 bg-blue-50/50 p-4 border border-blue-100 rounded-lg">
+                        <p class="text-xs font-semibold text-blue-800 uppercase tracking-wider mb-2">Parameters Required</p>
+                        <div id="param-sem" class="hidden">
+                            <label class="block text-xs font-medium text-gray-700 mb-1">Semester</label>
+                            <select id="input-sem" class="form-input py-1.5 text-sm">
+                                <option value="Fall">Fall</option>
+                                <option value="Spring">Spring</option>
+                                <option value="Summer">Summer</option>
+                                <option value="Winter">Winter</option>
+                            </select>
+                        </div>
+                        <div id="param-year" class="hidden">
+                            <label class="block text-xs font-medium text-gray-700 mb-1">Year</label>
+                            <input type="number" id="input-year" class="form-input py-1.5 text-sm w-24">
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex space-x-2">
+                        <button type="submit" class="btn-primary w-full flex justify-center items-center"><i class="fa-solid fa-play mr-2 text-sm"></i> Execute</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="flex-1 bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col h-[calc(100vh-8rem)]">
+                <div class="flex justify-between items-center mb-4 pb-4 border-b">
+                     <h2 id="result-title" class="text-xl font-bold text-gray-800">Results</h2>
+                     <button onclick="exportCSV()" class="btn-secondary text-sm hidden" id="btn-export"><i class="fa-solid fa-file-csv mr-2 text-green-600"></i> Export CSV</button>
+                </div>
+                <!-- Add inner scrolling container for tall tables -->
+                <div id="result-content" class="flex-1 overflow-auto -mx-2 px-2 fancy-scrollbar">
+                    <div class="flex flex-col items-center justify-center h-full text-center p-8 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50">
+                        <div class="h-16 w-16 bg-blue-100 text-blue-500 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-magnifying-glass-chart text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">No Query Executed</h3>
+                        <p class="text-sm text-gray-500 mt-2">Select a query from the panel and click execute.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/queries.js"></script>
+</body>
+</html>

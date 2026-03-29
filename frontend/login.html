@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - UniDBMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+<body class="bg-gray-50 flex h-screen items-center justify-center font-inter text-gray-800">
+
+    <div class="bg-white p-8 rounded-xl shadow-xl w-full max-w-md animate-fade-in">
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center h-16 w-16 bg-blue-100 text-blue-600 rounded-full mb-4">
+                <i class="fa-solid fa-graduation-cap text-3xl"></i>
+            </div>
+            <h1 class="text-2xl font-bold text-gray-800">UniDBMS Login</h1>
+            <p class="text-gray-500 mt-2 text-sm">Sign in to access the university database</p>
+        </div>
+
+        <form id="login-form" onsubmit="handleLogin(event)">
+            <div class="space-y-4">
+                <div>
+                    <label class="form-label mb-1">Username</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-user absolute left-3 top-3 text-gray-400"></i>
+                        <input type="text" id="username" required class="form-input pl-10 h-10 w-full" placeholder="e.g. admin or eng_admin">
+                    </div>
+                </div>
+                <div>
+                    <label class="form-label mb-1">Password</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-lock absolute left-3 top-3 text-gray-400"></i>
+                        <input type="password" id="password" required class="form-input pl-10 h-10 w-full" placeholder="••••••••">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary w-full mt-8 py-3 font-semibold text-lg" id="login-btn">
+                Sign In
+            </button>
+            <div id="loading-spinner" class="hidden flex justify-center mt-4">
+                <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+            </div>
+        </form>
+        
+        <div class="mt-6 border-t pt-4 text-xs text-gray-500 bg-gray-50 p-3 rounded text-center">
+            <p><strong>Demo Accounts:</strong></p>
+            <p>Admin: <code>admin</code> / <code>admin123</code></p>
+            <p>College: <code>eng_admin</code> / <code>eng123</code></p>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

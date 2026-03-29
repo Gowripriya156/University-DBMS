@@ -1,0 +1,81 @@
+/* Custom CSS to supplement Tailwind */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.fancy-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+.fancy-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.fancy-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 20px;
+}
+.dark .fancy-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #475569;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Base Buttons */
+.btn-primary {
+    @apply bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-200;
+}
+.btn-secondary {
+    @apply bg-white text-gray-700 border border-gray-300 font-medium py-2 px-4 rounded-lg shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-200;
+}
+.btn-danger {
+    @apply bg-red-600 text-white font-medium py-2 px-4 rounded-lg shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors duration-200;
+}
+
+/* Forms */
+.form-input {
+    @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-3 border transition-colors;
+}
+.form-label {
+    @apply block text-sm font-medium text-gray-700;
+}
+
+/* Tables */
+.data-table {
+    @apply min-w-full divide-y divide-gray-200;
+}
+.data-table th {
+    @apply px-6 py-3 bg-gray-50 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider;
+}
+.data-table td {
+    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-700;
+}
+.data-table tbody tr {
+    @apply hover:bg-blue-50/50 transition-colors cursor-pointer;
+}
+
+/* Toastify Overrides */
+.toastify {
+    border-radius: 8px !important;
+    font-family: 'Inter', sans-serif !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Glassmorphism utility */
+.glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.modal-open {
+    overflow: hidden;
+}
