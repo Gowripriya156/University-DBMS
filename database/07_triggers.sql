@@ -181,4 +181,22 @@ BEGIN
     VALUES ('Dept', 'INSERT', NEW.DCode, CONCAT('DName:', NEW.DName, ', CName:', NEW.CName), 'SYSTEM');
 END //
 
+-- Trigger 13: AfterInsertCourse
+CREATE TRIGGER trg_AfterInsertCourse
+AFTER INSERT ON Course
+FOR EACH ROW
+BEGIN
+    INSERT INTO Audit_Log (Table_Name, Operation, Record_Id, New_Values, Changed_By)
+    VALUES ('Course', 'INSERT', NEW.CCode, CONCAT('CoName:', NEW.CoName, ', DCode:', NEW.DCode), 'SYSTEM');
+END //
+
+-- Trigger 14: AfterInsertSection
+CREATE TRIGGER trg_AfterInsertSection
+AFTER INSERT ON Section
+FOR EACH ROW
+BEGIN
+    INSERT INTO Audit_Log (Table_Name, Operation, Record_Id, New_Values, Changed_By)
+    VALUES ('Section', 'INSERT', NEW.Sec_Id, CONCAT('SecNo:', NEW.SecNo, ', CCode:', NEW.CCode), 'SYSTEM');
+END //
+
 DELIMITER ;

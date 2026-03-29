@@ -111,4 +111,8 @@ INSERT INTO Takes (SId, Sec_Id, Grade) VALUES
 (9, 6, 'B'), (9, 7, 'C'),               -- Mason Irwin (Spring 2024)
 (1, 12, 'A'),                           -- Noah Adams (Fall 2024)
 (11, 11, NULL), (10, 13, NULL),         -- Logan, Sophia (Fall 2024 - In Progress)
-(6, 10, 'A'), (7, 10, 'B'), (8, 10, 'A-'); -- Business students (Spring 2024)
+(6, 10, 'A'), (7, 10, 'B'), (8, 10, 'A-'), -- Business students (Spring 2024)
+(5, 5, 'F'), (5, 4, 'F'), (5, 9, 'F'), -- Failing student for Q9
+(4, 6, 'D'), (4, 7, 'D+'), (4, 9, 'C-'), -- Low GPA student for Q2
+(8, 11, 'A'), (9, 13, 'B'), (3, 13, 'C'); -- More enrollments
+

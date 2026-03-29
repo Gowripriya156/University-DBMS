@@ -11,9 +11,9 @@ CREATE TABLE Users (
 
 INSERT INTO Users (Username, Password, Role, CollegeName) VALUES
 ('admin', 'admin123', 'University', NULL),
-('eng_admin', 'eng123', 'College', 'College of Engineering'),
-('sci_admin', 'sci123', 'College', 'College of Science'),
-('arts_admin', 'arts123', 'College', 'College of Arts and Sciences');
+('eng_admin', 'eng123', 'College', 'Engineering'),
+('sci_admin', 'sci123', 'College', 'Arts & Sciences'),
+('arts_admin', 'arts123', 'College', 'Business');
 
 DELIMITER //
 
@@ -78,8 +78,9 @@ BEGIN
     JOIN Student s ON t.SId = s.SId
     JOIN Section sec ON t.Sec_Id = sec.Sec_Id
     JOIN Course c ON sec.CCode = c.CCode
-    JOIN Dept d ON c.DCode = d.DCode
-    WHERE d.CName = p_cname;
+    JOIN Dept d_course ON c.DCode = d_course.DCode
+    JOIN Dept d_student ON s.DCode = d_student.DCode
+    WHERE d_course.CName = p_cname OR d_student.CName = p_cname;
 END //
 
 DELIMITER ;
