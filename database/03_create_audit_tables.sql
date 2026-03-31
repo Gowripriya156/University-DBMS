@@ -3,7 +3,7 @@ USE university_db;
 CREATE TABLE Audit_Log (
     Log_Id INT PRIMARY KEY AUTO_INCREMENT,
     Table_Name VARCHAR(50),
-    Operation VARCHAR(10),
+    Operation VARCHAR(50),
     Record_Id VARCHAR(100),
     Old_Values TEXT,
     New_Values TEXT,

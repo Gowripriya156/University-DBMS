@@ -1,0 +1,3 @@
+['CCode', 'CoName', 'Fname', 'Grade', 'Lname', 'SId', 'SecNo', 'Sec_Id']
+['AvgGPA', 'CCode', 'CourseName', 'Credits', 'DCode', 'DeptName', 'NumSections', 'TotalEnrolled']
+['ChairName', 'CollegeName', 'DCode', 'DeptName', 'NumCourses', 'NumInstructors', 'NumSections', 'NumStudents']

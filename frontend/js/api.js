@@ -64,6 +64,10 @@ const api = {
     addCourse: (data) => api.request('/courses', { method: 'POST', body: JSON.stringify(data) }),
     updateCourse: (ccode, data) => api.request(`/courses/${encodeURIComponent(ccode)}`, { method: 'PUT', body: JSON.stringify(data) }),
     deleteCourse: (ccode) => api.request(`/courses/${encodeURIComponent(ccode)}`, { method: 'DELETE' }),
+    
+    // Materials (NoSQL)
+    getMaterial: (ccode) => api.request(`/materials/${encodeURIComponent(ccode)}`),
+    saveMaterial: (ccode, data) => api.request(`/materials/${encodeURIComponent(ccode)}`, { method: 'POST', body: JSON.stringify(data) }),
 
     // Students
     getStudents: () => api.request('/students'),

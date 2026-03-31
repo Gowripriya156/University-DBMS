@@ -29,7 +29,7 @@ function renderTable() {
         filtered = filtered.filter(e => 
             e.Fname.toLowerCase().includes(q) || 
             e.Lname.toLowerCase().includes(q) || 
-            e.CoName.toLowerCase().includes(q) ||
+            (e.CoName || e.CourseName || '').toLowerCase().includes(q) ||
             e.SId.toString().includes(q)
         );
     }
@@ -60,7 +60,7 @@ function renderTable() {
                 <div class="text-sm text-gray-700">Sec ID: <span class="font-mono text-purple-600 font-semibold">${e.Sec_Id}</span></div>
                 <div class="text-xs text-gray-500 mt-0.5">Section No: ${e.SecNo}</div>
             </td>
-            <td class="font-semibold text-gray-800">${e.CoName}</td>
+            <td class="font-semibold text-gray-800">${e.CoName || e.CourseName || '-'}</td>
             <td class="text-center">${gradeBadge}</td>
             <td class="space-x-2 w-32">
                 <button onclick="openAssignGradeModal(${e.SId}, ${e.Sec_Id}, '${e.Grade||''}')" class="text-amber-600 hover:text-amber-900 bg-amber-50 hover:bg-amber-100 px-3 py-1.5 rounded text-xs font-medium transition-colors"><i class="fa-solid fa-award mr-1"></i> Grade</button>

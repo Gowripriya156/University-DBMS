@@ -19,7 +19,7 @@ INSERT INTO Dept (DCode, DName, DOffice, DPhone, CName) VALUES
 ('MGT', 'Management', 'BUS 301', '555-3301', 'Business');
 
 -- Insert Instructors
-INSERT INTO Instructor (IName, IOffice, IPhone, Rank, DCode) VALUES
+INSERT INTO Instructor (IName, IOffice, IPhone, `Rank`, DCode) VALUES
 ('Alice Smith', 'ENG 202', '555-1102', 'Professor', 'CS'),
 ('Bob Johnson', 'ENG 203', '555-1103', 'Associate Professor', 'CS'),
 ('Charlie Brown', 'ENG 204', '555-1104', 'Assistant Professor', 'CS'),

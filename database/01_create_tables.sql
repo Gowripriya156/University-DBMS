@@ -5,15 +5,15 @@ CREATE TABLE College (
     CName VARCHAR(100) PRIMARY KEY,
     COffice VARCHAR(100),
     CPhone VARCHAR(20),
-    Dean_Id INT
+    Dean_Id INT UNIQUE
 );
 
 CREATE TABLE Dept (
     DCode VARCHAR(20) PRIMARY KEY,
-    DName VARCHAR(100) NOT NULL,
+    DName VARCHAR(100) NOT NULL UNIQUE,
     DOffice VARCHAR(100),
     DPhone VARCHAR(20),
-    Chair_Id INT,
+    Chair_Id INT UNIQUE,
     CStartDate DATE,
     CName VARCHAR(100)
 );
@@ -23,15 +23,15 @@ CREATE TABLE Instructor (
     IName VARCHAR(100) NOT NULL,
     IOffice VARCHAR(100),
     IPhone VARCHAR(20),
-    Rank VARCHAR(50),
-    DCode VARCHAR(20)
+    `Rank` VARCHAR(50),
+    DCode VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE Course (
     CCode VARCHAR(20) PRIMARY KEY,
-    CoName VARCHAR(100) NOT NULL,
+    CoName VARCHAR(100) NOT NULL UNIQUE,
     Credits INT NOT NULL CHECK (Credits > 0 AND Credits <= 6),
-    DCode VARCHAR(20)
+    DCode VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE Student (
@@ -42,7 +42,7 @@ CREATE TABLE Student (
     Phone VARCHAR(20),
     Major VARCHAR(100),
     DOB DATE,
-    DCode VARCHAR(20)
+    DCode VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE Section (
@@ -52,8 +52,8 @@ CREATE TABLE Section (
     Year INT NOT NULL CHECK (Year >= 2000 AND Year <= 2100),
     Bldg VARCHAR(50),
     RoomNo VARCHAR(20),
-    CCode VARCHAR(20),
-    Inst_Id INT
+    CCode VARCHAR(20) NOT NULL,
+    Inst_Id INT NOT NULL
 );
 
 CREATE TABLE Takes (

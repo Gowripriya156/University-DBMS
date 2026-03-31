@@ -18,7 +18,6 @@ def get_courses():
         else:
             cursor.execute("SELECT * FROM vw_CourseOfferings")
             results = cursor.fetchall()
-        results = cursor.fetchall()
         cursor.close()
         conn.close()
         return jsonify(results), 200

@@ -63,7 +63,7 @@ BEGIN
         END IF;
     END IF;
 
-    INSERT INTO Instructor (IName, IOffice, IPhone, Rank, DCode) VALUES (p_iname, p_ioffice, p_iphone, p_rank, p_dcode);
+    INSERT INTO Instructor (IName, IOffice, IPhone, `Rank`, DCode) VALUES (p_iname, p_ioffice, p_iphone, p_rank, p_dcode);
     SELECT LAST_INSERT_ID() AS New_Id;
 END //
 
@@ -234,7 +234,7 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Instructor does not exist.';
     END IF;
     
-    UPDATE Instructor SET IName = p_iname, IOffice = p_ioffice, IPhone = p_iphone, Rank = p_rank, DCode = p_dcode WHERE Id = p_id;
+    UPDATE Instructor SET IName = p_iname, IOffice = p_ioffice, IPhone = p_iphone, `Rank` = p_rank, DCode = p_dcode WHERE Id = p_id;
     SELECT 'Instructor updated successfully' AS Message;
 END //
 
@@ -427,5 +427,22 @@ BEGIN
     SELECT 'Section deleted successfully' AS Message;
 END //
 
+-- Procedure to validate sections have >= 5 students
+CREATE PROCEDURE sp_ValidateSectionEnrollments()
+BEGIN
+    SELECT 
+        s.Sec_Id,
+        s.SecNo,
+        c.CCode,
+        c.CoName,
+        s.Sem,
+        s.Year,
+        COUNT(t.SId) AS Enrolled_Students
+    FROM Section s
+    JOIN Course c ON s.CCode = c.CCode
+    LEFT JOIN Takes t ON s.Sec_Id = t.Sec_Id
+    GROUP BY s.Sec_Id, s.SecNo, c.CCode, c.CoName, s.Sem, s.Year
+    HAVING COUNT(t.SId) < 5;
+END //
 
 DELIMITER ;

@@ -10,6 +10,7 @@ from routes.takes_routes import takes_bp
 from routes.report_routes import report_bp
 from routes.query_routes import query_bp
 from routes.auth_routes import auth_bp
+from routes.material_routes import material_bp
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -26,6 +27,7 @@ app.register_blueprint(section_bp, url_prefix='/api/sections')
 app.register_blueprint(takes_bp, url_prefix='/api/enrollments')
 app.register_blueprint(report_bp, url_prefix='/api/reports')
 app.register_blueprint(query_bp, url_prefix='/api/queries')
+app.register_blueprint(material_bp, url_prefix='/api/materials')
 
 @app.route('/')
 def home():

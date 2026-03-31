@@ -18,7 +18,6 @@ def get_sections():
         else:
             cursor.execute("SELECT * FROM vw_SectionDetails")
             results = cursor.fetchall()
-        results = cursor.fetchall()
         cursor.close()
         conn.close()
         return jsonify(results), 200

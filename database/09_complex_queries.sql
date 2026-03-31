@@ -80,7 +80,7 @@ BEGIN
         JOIN vw_StudentGPA vw ON s.SId = vw.SId
         JOIN Dept d ON s.DCode = d.DCode
     )
-    SELECT SId, Fname, Lname, DName, GPA, rnk AS Rank
+    SELECT SId, Fname, Lname, DName, GPA, rnk AS `Rank`
     FROM RankedStudents
     WHERE rnk <= 5;
 END //
@@ -200,7 +200,7 @@ END //
 -- Query 16: List instructors who have never taught any section
 CREATE PROCEDURE sp_Q16_NeverTaughtInstructors()
 BEGIN
-    SELECT Id, IName, Rank
+    SELECT Id, IName, `Rank`
     FROM Instructor
     WHERE Id NOT IN (SELECT DISTINCT Inst_Id FROM Section WHERE Inst_Id IS NOT NULL);
 END //

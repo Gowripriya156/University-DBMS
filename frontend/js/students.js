@@ -51,7 +51,7 @@ async function performSearch(query) {
         cacheStudents = students.map(s => ({
             SId: s.SId,
             StudentFullName: s.Fname + ' ' + s.Lname,
-            DeptName: s.Department,
+            DeptName: s.Department || s.DeptName || s.DName,
             Major: s.Major,
             // Search SP doesn't return GPA/Credits, but that's ok, just show N/A
             GPA: null, TotalCoursesCompleted: null, CurrentEnrollments: null
