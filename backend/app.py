@@ -13,6 +13,7 @@ from routes.auth_routes import auth_bp
 from routes.material_routes import material_bp
 
 app = Flask(__name__)
+app.json.sort_keys = False
 app.url_map.strict_slashes = False
 CORS(app) # Enable CORS for all routes
 
